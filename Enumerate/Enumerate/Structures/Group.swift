@@ -15,7 +15,6 @@ class Group: ObservableObject, Identifiable {
             for item in milestones {
                 item.currentCardsComplete = completedCards
             }
-            print(completedCards)
         }
     }
     
@@ -130,15 +129,17 @@ extension Group {
         
         var milestones: [Milestone] = []
         var startValue: Int = 0
-        var lengthValue: Int = 20
+        var lengthValue: Int = min(flashCards.count, 10)
         
         for idx in 0..<( ((flashCards.count - 1) / 10) + 1 ) {
             let slice = Array(flashCards[ (idx * 10)..<min( ((idx + 1) * 10), flashCards.count ) ])
+            lengthValue += slice.count
+            
+            print(idx, startValue, lengthValue)
             
             milestones.append( Milestone(id: idx, cardStartValue: startValue, cardSizeValue: lengthValue, cards: slice, syncCards: updateCardsComplete, cardRequest: requestCards, completedCards: completedCards ))
             
             startValue += lengthValue
-            lengthValue += 10
         }
         
         return milestones

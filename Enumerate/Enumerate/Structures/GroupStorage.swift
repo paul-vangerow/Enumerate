@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 class GroupStorage: ObservableObject {
-    @Published var groups: [Group] = [Group.PreSpanish]
+    @Published var groups: [Group] = []
     var recentNewGroup: Group = Group()
     
     func makeNewGroup() {

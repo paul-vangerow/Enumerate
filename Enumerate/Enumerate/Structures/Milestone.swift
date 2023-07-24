@@ -14,7 +14,7 @@ class Milestone: Identifiable, ObservableObject {
     
     var milestoneState: ProgressState {
         if currentCardsComplete >= (cardStartValue + cardSizeValue) {
-            if ( cards.count > 10 ) {
+            if ( cards.count > min(cardSizeValue, 10) ) {
                 clearTranslation()
             }
             return .DONE
@@ -22,7 +22,7 @@ class Milestone: Identifiable, ObservableObject {
             return .UNAVAILABLE
         } else {
             if ( cards.count <= 10 ) {
-                addCards(newCards: requestCards(cardSizeValue - 10), startVal: 10, localCompletion: (currentCardsComplete - cardStartValue) )
+                addCards(newCards: requestCards(cardSizeValue - cards.count), startVal: cards.count, localCompletion: (currentCardsComplete - cardStartValue) )
             }
             return .PROGRESS
         }

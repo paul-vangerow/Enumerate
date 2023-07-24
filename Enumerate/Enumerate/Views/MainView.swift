@@ -16,7 +16,7 @@ struct MainView: View {
                 VStack {
                     ScrollView(showsIndicators: false) {
                         HSpacer(height: 50)
-                        HeadingText(text: "Quantify", size: 50)
+                        HeadingText(text: "Enumerate", size: 50)
                         HSpacer(height: 50)
                         ForEach(groupStore.groups) { group in
                             VStack {
