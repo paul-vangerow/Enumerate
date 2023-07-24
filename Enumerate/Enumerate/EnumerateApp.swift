@@ -17,7 +17,7 @@ struct EnumerateApp: App {
                 .environmentObject(centralGroupStore)
                 .task {
                     do {
-                        centralGroupStore.groups = try await GroupStorage.load()
+//                        centralGroupStore.groups = try await GroupStorage.load()
                     } catch {
                         print("An error has occured. Deleting defunct data...")
                         do {
