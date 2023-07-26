@@ -7,6 +7,7 @@ class Group: ObservableObject, Identifiable {
 // Customization
     @Published var groupName: String
     @Published var groupImage: Data?
+    @Published var currentVoice: String = "Silent"
     
 // Functionality
     @Published var wordList: [WordPair]
@@ -25,20 +26,24 @@ class Group: ObservableObject, Identifiable {
     var seed: UInt64
     var generator: SplitMix64
     
+    var speaker: TextSpeaker?
+    
 // Initialisers
     
     // COMPLETE INITIALISER
-    init(id: UUID = UUID(), groupName: String, groupImage: Data?, wordList: [WordPair], completedCards: Int, seed: UInt64) {
+    init(id: UUID = UUID(), groupName: String, groupImage: Data?, wordList: [WordPair], completedCards: Int, seed: UInt64, voice: String) {
         self.id = id
         self.groupName = groupName
         self.groupImage = groupImage
         self.wordList = wordList
         self.completedCards = completedCards
         self.seed = seed
+        self.currentVoice = voice
         
         generator = SplitMix64(seed: seed )
         
         requestItems(words: wordList)
+        getSpeech()
     }
     
     // NEW GROUP INITIALISER
@@ -49,6 +54,7 @@ class Group: ObservableObject, Identifiable {
         self.completedCards = 0
         self.seed = UInt64.random(in: 0...UINT64_MAX)
         self.generator = SplitMix64(seed: seed)
+        self.currentVoice = "silent"
     }
     
     // DECODE INITIALISER
@@ -60,10 +66,12 @@ class Group: ObservableObject, Identifiable {
         wordList = try values.decode([WordPair].self, forKey: .wordList)
         completedCards = try values.decode(Int.self, forKey: .completedCards)
         seed = try values.decode(UInt64.self, forKey: .seed)
+        currentVoice = try values.decode(String.self, forKey: .voice)
         
         generator = SplitMix64(seed: seed)
         
         requestItems(words: wordList)
+        getSpeech()
     }
 }
 
@@ -135,8 +143,6 @@ extension Group {
             let slice = Array(flashCards[ (idx * 10)..<min( ((idx + 1) * 10), flashCards.count ) ])
             lengthValue += slice.count
             
-            print(idx, startValue, lengthValue)
-            
             milestones.append( Milestone(id: idx, cardStartValue: startValue, cardSizeValue: lengthValue, cards: slice, syncCards: updateCardsComplete, cardRequest: requestCards, completedCards: completedCards ))
             
             startValue += lengthValue
@@ -169,6 +175,10 @@ extension Group {
                 requestItems(words: wordList)
             }
         }
+        if currentVoice != group.currentVoice {
+            currentVoice = group.currentVoice
+            getSpeech()
+        }
     }
     
         /* ----- RequestCards -----
@@ -194,6 +204,12 @@ extension Group {
         completedCards = value
     }
     
+    func getSpeech() {
+        if currentVoice != "silent" {
+            speaker = TextSpeaker(voice: currentVoice)
+        }
+    }
+    
 }
 
 // ---------- PROTOCOL CONFORMANCE ----------
@@ -204,7 +220,8 @@ extension Group: Equatable {
         return lhs.completedCards == rhs.completedCards &&
                lhs.groupName      == rhs.groupName      &&
                lhs.groupImage     == rhs.groupImage     &&
-               lhs.wordList       == rhs.wordList
+               lhs.wordList       == rhs.wordList       &&
+               lhs.currentVoice   == rhs.currentVoice
     }
 }
 
@@ -217,6 +234,7 @@ extension Group: Hashable {
         hasher.combine(wordList)
         hasher.combine(completedCards)
         hasher.combine(seed)
+        hasher.combine(currentVoice)
     }
 }
 
@@ -230,6 +248,7 @@ extension Group: Codable {
         case wordList
         case completedCards
         case seed
+        case voice
     }
     
     func encode(to encoder: Encoder) throws {
@@ -240,6 +259,7 @@ extension Group: Codable {
         try container.encode(wordList, forKey: .wordList)
         try container.encode(completedCards, forKey: .completedCards)
         try container.encode(seed, forKey: .seed)
+        try container.encode(currentVoice, forKey: .voice)
     }
 }
 
@@ -262,5 +282,5 @@ extension Group {
     
     static let imageData: Data? = UIImage(named: "SpainPlaceholder")!.pngData()
     
-    static let PreSpanish = Group(groupName: "Spanish", groupImage: imageData, wordList: sample_wordlist_spanish, completedCards: 0, seed: 1)
+    static let PreSpanish = Group(groupName: "Spanish", groupImage: imageData, wordList: sample_wordlist_spanish, completedCards: 0, seed: 1, voice: "com.apple.voice.compact.es-ES.Monica" )
 }

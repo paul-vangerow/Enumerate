@@ -33,6 +33,8 @@
 		732AFACE2A6ECAFF009B4E9E /* TranslateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732AFABD2A6ECAFF009B4E9E /* TranslateView.swift */; };
 		732AFACF2A6ECAFF009B4E9E /* CompletionBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732AFABE2A6ECAFF009B4E9E /* CompletionBanner.swift */; };
 		732AFAD02A6ECAFF009B4E9E /* MilestoneCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732AFABF2A6ECAFF009B4E9E /* MilestoneCard.swift */; };
+		732AFAD22A7148EC009B4E9E /* TextSpeaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732AFAD12A7148EC009B4E9E /* TextSpeaker.swift */; };
+		732AFAD42A716D6E009B4E9E /* VoiceIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 732AFAD32A716D6E009B4E9E /* VoiceIdentifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +65,8 @@
 		732AFABD2A6ECAFF009B4E9E /* TranslateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TranslateView.swift; sourceTree = "<group>"; };
 		732AFABE2A6ECAFF009B4E9E /* CompletionBanner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompletionBanner.swift; sourceTree = "<group>"; };
 		732AFABF2A6ECAFF009B4E9E /* MilestoneCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MilestoneCard.swift; sourceTree = "<group>"; };
+		732AFAD12A7148EC009B4E9E /* TextSpeaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSpeaker.swift; sourceTree = "<group>"; };
+		732AFAD32A716D6E009B4E9E /* VoiceIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceIdentifier.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,8 @@
 				732AFAA12A6ECAB9009B4E9E /* Milestone.swift */,
 				732AFAA42A6ECABA009B4E9E /* RandomGenerator.swift */,
 				732AFAA22A6ECAB9009B4E9E /* WordPair.swift */,
+				732AFAD12A7148EC009B4E9E /* TextSpeaker.swift */,
+				732AFAD32A716D6E009B4E9E /* VoiceIdentifier.swift */,
 			);
 			path = Structures;
 			sourceTree = "<group>";
@@ -220,6 +226,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				732AFAAE2A6ECABA009B4E9E /* CardHolder.swift in Sources */,
+				732AFAD22A7148EC009B4E9E /* TextSpeaker.swift in Sources */,
 				732AFAC02A6ECAFF009B4E9E /* GroupEdit.swift in Sources */,
 				732AFAD02A6ECAFF009B4E9E /* MilestoneCard.swift in Sources */,
 				732AFAC32A6ECAFF009B4E9E /* WrapperGroupView.swift in Sources */,
@@ -231,6 +238,7 @@
 				732AFAC92A6ECAFF009B4E9E /* ContentView.swift in Sources */,
 				732AFAAB2A6ECABA009B4E9E /* RandomGenerator.swift in Sources */,
 				732AFAC12A6ECAFF009B4E9E /* FlashCardView.swift in Sources */,
+				732AFAD42A716D6E009B4E9E /* VoiceIdentifier.swift in Sources */,
 				732AFAAA2A6ECABA009B4E9E /* Group.swift in Sources */,
 				732AFACA2A6ECAFF009B4E9E /* MainView.swift in Sources */,
 				732AFAC22A6ECAFF009B4E9E /* GroupCard.swift in Sources */,

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import AVFoundation
 
 struct GroupEdit: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -61,6 +62,17 @@ struct GroupEdit: View {
                     }
                 }
                 .buttonStyle(PlainButtonStyle())
+                Picker(selection: $group.currentVoice, content: {
+                    let items = TextSpeaker.getVoiceCodes()
+                    
+                    ForEach( items ) { item in
+                        Text( item.item.language ).tag( item.id )
+                    }
+
+                    Text("Silent").tag( "silent" )
+                }, label: {
+                    Label("Language Code", systemImage: "globe")
+                })
             } header: {
                 Text("Customize")
             }

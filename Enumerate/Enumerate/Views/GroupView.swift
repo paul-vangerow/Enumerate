@@ -23,7 +23,7 @@ struct GroupView: View {
                     ScrollView {
                         ForEach (available, id: \.0) { item in
                             if item.1.milestoneState != .UNAVAILABLE {
-                                NavigationLink(destination: MilestoneView(milestone: item.1)) {
+                                NavigationLink(destination: MilestoneView(milestone: item.1, group: currentGroup)) {
                                     MilestoneCard(mileStone: item.1)
                                     
                                 }
